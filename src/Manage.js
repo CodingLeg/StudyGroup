@@ -150,13 +150,13 @@ users(){
       </div>
       
       <div className="row d-flex">
-      <select  class="form-control" ref={this.myRef} style={{width:"220px"}} >
+      <select  className="form-control" ref={this.myRef} style={{width:"220px"}} >
         {add}
       </select>
       <button type="button" value="id" onClick={this.add} className="btn btn-primary ml-3">Add Member</button>
       </div>
       <div className="row d-flex mt-3">
-      <select class="form-control" ref={this.myRef1}  style={{width:"220px"}}  placeholder="Full Name">
+      <select className="form-control" ref={this.myRef1}  style={{width:"220px"}}  placeholder="Full Name">
           {dlt}
       </select>
       <button type="button" value="id" onClick={this.delete} className="btn btn-danger ml-3">Remove Member</button>

@@ -30,20 +30,20 @@ class Admin extends React.Component {
     render() {
   return (
     <div>
-      <div class="container1" style={{marginLeft:"25%"}} id="container1">
-	<div class="form-container1 sign-up-container1">
+      <div className="container1" style={{marginLeft:"25%"}} id="container1">
+	<div className="form-container1 sign-up-container1">
 	</div>
-	<div class="form-container1 sign-in-container1">
-		<form  class="form1" >
+	<div className="form-container1 sign-in-container1">
+		<form  className="form1" >
 			<h1>Sign in</h1>
-			<input type="text" ref={this.myRef}  class="input1" placeholder="UserName" />
-			<input type="password" ref={this.myRef1}   class="input1" placeholder="Password" />
-			<button  type="button"  class="button1" onClick={this.registerfn} >Sign In</button>
+			<input type="text" ref={this.myRef}  className="input1" placeholder="UserName" />
+			<input type="password" ref={this.myRef1}   className="input1" placeholder="Password" />
+			<button  type="button"  className="button1" onClick={this.registerfn} >Sign In</button>
 		</form>
 	</div>
-	<div class="overlay-container1">
-		<div class="overlay">
-			<div class="overlay-panel overlay-right">
+	<div className="overlay-container1">
+		<div className="overlay">
+			<div className="overlay-panel overlay-right">
 				<h1>Hello, Admin!</h1>
 				<p> Welcome Back,Please login with your personal info</p>
 			</div>

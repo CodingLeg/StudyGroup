@@ -79,11 +79,11 @@ class AdminUpdateForm extends React.Component{
         return (
             <div>
             
-            <div class="card mx-auto"  style={{width: "450px" , height:"400px" , marginTop:"10%"}}>
+            <div className="card mx-auto"  style={{width: "450px" , height:"400px" , marginTop:"10%"}}>
   
-  <div class="card-body">
-    <h5  class="card-title" style={{marginLeft:"70px"}}  >Update Form</h5>
-    <p class="card-text">
+  <div className="card-body">
+    <h5  className="card-title" style={{marginLeft:"70px"}}  >Update Form</h5>
+    <p className="card-text">
     <table className="table table-bordered">
                 <tbody>
                     <tr>

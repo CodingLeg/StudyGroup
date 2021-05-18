@@ -93,19 +93,19 @@ if(this.state.data[i].email===this.myRef.current.value&&this.state.data[i].passw
         return (
             <div style={{marginLeft:"25%"}}>
     
-<div class="container1" id="container1">
-	<div class="form-container1 sign-up-container1">
-		<form  class="form1" >
+<div className="container1" id="container1">
+	<div className="form-container1 sign-up-container1">
+		<form  className="form1" >
 			<h1>Register</h1>
 
-            <input type="text" class="input1" ref={this.myRef5} placeholder="UserName" />
+            <input type="text" className="input1" ref={this.myRef5} placeholder="UserName" />
       
-			<input type="text" class="input1" ref={this.myRef2} placeholder="FullName" />
+			<input type="text" className="input1" ref={this.myRef2} placeholder="FullName" />
 
-      <input type="email"  class="input1" ref={this.myRef4} placeholder="Email" />
+      <input type="email"  className="input1" ref={this.myRef4} placeholder="Email" />
       
 
-      <input type="password" class="input1" ref={this.myRef3} placeholder="Password" />
+      <input type="password" className="input1" ref={this.myRef3} placeholder="Password" />
      {/* 
       <input class="input1" type="text" ref={this.myRef5} placeholder="FirstName" />
       
@@ -117,32 +117,32 @@ if(this.state.data[i].email===this.myRef.current.value&&this.state.data[i].passw
        <input  style={{marginLeft:"30px"}} type="file"   ref={this.myRef7} placeholder="Chhose File" />
       <br></br>
         */ }
-			<button  class="button1" type="button" onClick={this.registerfn}>Submit</button>
+			<button  className="button1" type="button" onClick={this.registerfn}>Submit</button>
 		</form>
 	</div>
-	<div class="form-container1 sign-in-container1">
-		<form  class="form1">
+	<div className="form-container1 sign-in-container1">
+		<form  className="form1">
 			<h1>Sign in</h1>
-			<input type="email" class="input1" ref={this.myRef} placeholder="Email" />
-			<input type="password"  class="input1" ref={this.myRef1} placeholder="Password" />
+			<input type="email" className="input1" ref={this.myRef} placeholder="Email" />
+			<input type="password"  className="input1" ref={this.myRef1} placeholder="Password" />
       <br></br>
 			
-			<button   class="button1" type="button" onClick={this.loginfn}>Submit</button>
+			<button   className="button1" type="button" onClick={this.loginfn}>Submit</button>
 <br></br>
       <a href="Admin">Are you Admin?</a>
 		</form>
 	</div>
-	<div class="overlay-container1">
-		<div class="overlay">
-			<div class="overlay-panel overlay-left">
+	<div className="overlay-container1">
+		<div className="overlay">
+			<div className="overlay-panel overlay-left">
 				<h1>Welcome Back!</h1>
 				<p>To keep connected with us please login with your personal info</p>
-				<button    class="ghost button1"  id="signIn">Sign In</button>
+				<button    className="ghost button1"  id="signIn">Sign In</button>
 			</div>
-			<div class="overlay-panel overlay-right">
+			<div className="overlay-panel overlay-right">
 				<h1>Hello, Friend!</h1>
 				<p>Enter your personal details and start journey with us</p>
-				<button    class="ghost button1" id="signUp">Sign Up</button>
+				<button    className="ghost button1" id="signUp">Sign Up</button>
 			</div>
 		</div>
 	</div>

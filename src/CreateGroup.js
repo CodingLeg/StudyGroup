@@ -66,14 +66,14 @@ alert("Group Already Present, Please Enter New Name")
     <h5 className="card-title">Create Your Group</h5>
     <form>
  
-  <div class="form-group">
+  <div className="form-group">
     <label for="exampleInputPassword1">Enter Group Name</label>
-    <input ref={this.myRef} type="text" class="form-control" id="exampleInputPassword1" placeholder="Group Name"/>
-    <small id="emailHelp" class="form-text text-muted">Enter new group name to create a new group.</small>
+    <input ref={this.myRef} type="text" className="form-control" id="exampleInputPassword1" placeholder="Group Name"/>
+    <small id="emailHelp" className="form-text text-muted">Enter new group name to create a new group.</small>
   </div>
-  <div class="form-group form-check">
+  <div className="form-group form-check">
   </div>
-  <button type="button" onClick={this.FetchGroup} class="btn btn-primary">Submit</button>
+  <button type="button" onClick={this.FetchGroup} className="btn btn-primary">Submit</button>
 </form>
   </div>
   </div>

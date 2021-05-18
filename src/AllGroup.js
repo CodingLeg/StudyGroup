@@ -63,7 +63,7 @@ export default class AllGroup extends Component {
           });
             return (
     <>        
-              <div class="row mx-auto" style={{width:'70%'}}>
+              <div className="row mx-auto" style={{width:'70%'}}>
     {rows}</div>
               </>
             )
