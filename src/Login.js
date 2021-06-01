@@ -1,6 +1,6 @@
 import React from 'react';
 import './Login.css';
-
+import $ from 'jquery'; 
 
 class Login extends React.Component {
 
@@ -17,8 +17,10 @@ class Login extends React.Component {
         this.myRef7=React.createRef();
         this.registerfn = this.registerfn.bind(this);
         this.loginfn = this.loginfn.bind(this);
+        this.sendemail= this.sendemail.bind(this);
         this.state={
-            data:[]
+            data:[],
+            register: []
         };
     }
  
@@ -59,10 +61,61 @@ class Login extends React.Component {
              
           })
           .then(response=>response.json())
-          .then((data)=>console.log(data))
+          .then((data)=>{
+            this.setState({
+                register:data
+            });
+            console.log(this.state.register.id)
+            
+            if(this.state.register.id!=null){
+                document.getElementById('success').style.display='block';
+                this.sendemail();
+
+                setTimeout(function() {
+                    $('#success').fadeOut('fast'); 
+                    
+                    window.location.reload();
+                }, 1000);
+            }
+            else{
+            if(this.state.register.username[0]=='user with this username already exists.'){
+                document.getElementById('fail1').style.display='block';
+                setTimeout(function() {
+                    $('#fail1').fadeOut('fast'); 
+                }, 1000);
+            }
+            if(this.state.register.email[0]=='user with this email already exists.'){
+                document.getElementById('fail2').style.display='block';
+                setTimeout(function() {
+                    $('#fail2').fadeOut('fast'); 
+                }, 1000);
+            }}
+           
+        })
+          
           .catch(error => console.error('Error:', error))
-          window.location.replace("/Login");
+         
       
+      }
+
+      sendemail(){
+
+          let details = {
+            name: this.myRef2.current.value,
+            email: this.myRef4.current.value,
+            message: "You sucessfully register for Study Group ",
+          };
+            let response =  fetch("http://localhost:5000/contact", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json;charset=utf-8",
+              },
+              body: JSON.stringify(details),
+            });
+            
+            let result = response.json();
+            alert(result.status);
+          
       }
 
 
@@ -77,15 +130,20 @@ class Login extends React.Component {
 for(var i=0; i<this.state.data.length; i++){
 if(this.state.data[i].email===this.myRef.current.value&&this.state.data[i].password===this.myRef1.current.value){
     localStorage.setItem("username",this.state.data[i].full_name)
+    localStorage.setItem("email",this.state.data[i].email)
     localStorage.setItem("id",this.state.data[i].id)
-  
     this.props.history.push('/UserDashboard')
     break
 }
+else{
+    document.getElementById('fail').style.display='block';
+            setTimeout(function() {
+                $('#fail').fadeOut('fast'); 
+            }, 1000);
+}
 }
 
-            
-        });
+  });
     }
 
 
@@ -93,19 +151,30 @@ if(this.state.data[i].email===this.myRef.current.value&&this.state.data[i].passw
         return (
             <div style={{marginLeft:"25%"}}>
     
-<div className="container1" id="container1">
-	<div className="form-container1 sign-up-container1">
-		<form  className="form1" >
+<div class="container1" id="container1">
+	<div class="form-container1 sign-up-container1">
+		<form  class="form1" >
+        <div id="success"style={{display:'none'}}className="alert alert-success alert-dismissable fade-show" role="alert">
+        Registered Successfully.
+        <button type="button" class="close" data-dismiss="alert" aria-label="close"></button></div>
+
+        <div id="fail1"style={{display:'none'}}className="alert alert-danger alert-dismissable fade-show" role="alert">
+        Username already present.
+        <button type="button" class="close" data-dismiss="alert" aria-label="close"></button></div>
+
+        <div id="fail2"style={{display:'none'}}className="alert alert-danger alert-dismissable fade-show" role="alert">
+        Email already registered.
+        <button type="button" class="close" data-dismiss="alert" aria-label="close"></button></div>
 			<h1>Register</h1>
 
-            <input type="text" className="input1" ref={this.myRef5} placeholder="UserName" />
+            <input type="text" class="input1" ref={this.myRef5} placeholder="UserName" />
       
-			<input type="text" className="input1" ref={this.myRef2} placeholder="FullName" />
+			<input type="text" class="input1" ref={this.myRef2} placeholder="FullName" />
 
-      <input type="email"  className="input1" ref={this.myRef4} placeholder="Email" />
+      <input type="email"  class="input1" ref={this.myRef4} placeholder="Email" />
       
 
-      <input type="password" className="input1" ref={this.myRef3} placeholder="Password" />
+      <input type="password" class="input1" ref={this.myRef3} placeholder="Password" />
      {/* 
       <input class="input1" type="text" ref={this.myRef5} placeholder="FirstName" />
       
@@ -117,32 +186,37 @@ if(this.state.data[i].email===this.myRef.current.value&&this.state.data[i].passw
        <input  style={{marginLeft:"30px"}} type="file"   ref={this.myRef7} placeholder="Chhose File" />
       <br></br>
         */ }
-			<button  className="button1" type="button" onClick={this.registerfn}>Submit</button>
+			<button  class="button1" type="button" onClick={this.registerfn}>Submit</button>
 		</form>
 	</div>
-	<div className="form-container1 sign-in-container1">
-		<form  className="form1">
+	<div class="form-container1 sign-in-container1">
+		<form  class="form1">
+        <div id="fail"style={{display:'none'}}className="alert alert-danger alert-dismissable fade-show" role="alert">
+        Invalid Email or Password
+        <button type="button" class="close" data-dismiss="alert" aria-label="close"></button></div>
+
+
 			<h1>Sign in</h1>
-			<input type="email" className="input1" ref={this.myRef} placeholder="Email" />
-			<input type="password"  className="input1" ref={this.myRef1} placeholder="Password" />
+			<input type="email" class="input1" ref={this.myRef} placeholder="Email" />
+			<input type="password"  class="input1" ref={this.myRef1} placeholder="Password" />
       <br></br>
 			
-			<button   className="button1" type="button" onClick={this.loginfn}>Submit</button>
+			<button   class="button1" type="button" onClick={this.loginfn}>Submit</button>
 <br></br>
       <a href="Admin">Are you Admin?</a>
 		</form>
 	</div>
-	<div className="overlay-container1">
-		<div className="overlay">
-			<div className="overlay-panel overlay-left">
+	<div class="overlay-container1">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
 				<h1>Welcome Back!</h1>
 				<p>To keep connected with us please login with your personal info</p>
-				<button    className="ghost button1"  id="signIn">Sign In</button>
+				<button    class="ghost button1"  id="signIn">Sign In</button>
 			</div>
-			<div className="overlay-panel overlay-right">
+			<div class="overlay-panel overlay-right">
 				<h1>Hello, Friend!</h1>
 				<p>Enter your personal details and start journey with us</p>
-				<button    className="ghost button1" id="signUp">Sign Up</button>
+				<button    class="ghost button1" id="signUp">Sign Up</button>
 			</div>
 		</div>
 	</div>

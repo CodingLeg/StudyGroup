@@ -12,11 +12,10 @@ import AdminDashboard from './AdminDashboard'
 import AdminUpdateForm from './AdminUpdateForm'
 import UserDashboard from './UserDashboard'
 import Lists from './List'
-
-
-
-
+import demo from './demo'
+import ContactForm from './ContactForm';
 import Manage from './Manage'
+
 import {
 BrowserRouter as Router, 
 Route,
@@ -29,8 +28,9 @@ export default class App extends Component {
            
            <Router>
                <Switch>
+
                <Route exact path="/Login" component={Login} />
-               <Route exact path="/Chat/:group/:user/" component={Chat} />
+               <Route exact path="/Chat/:group/:id/:user/" component={Chat} />
                <Route exact path="/404" component={notfound} />
                <Route exact path="/Register" component={Register} />
                <Route exact path="/Admin" component={List} />
@@ -39,10 +39,12 @@ export default class App extends Component {
                <Route exact path="/Dashboard" component={Dashboard} />
                <Route exact path="/AllGroup" component={AllGroup} />
                <Route exact path="/CreateGroup" component={CreateGroup} />
-               <Route exact path="/Manage/:id" component={Manage} />
+               <Route exact path="/ContactForm" component={ContactForm} />
+               <Route exact path="/Manage/:id/:gname" component={Manage} />
                <Route exact path="/AdminDashboard" component={AdminDashboard} />
                <Route exact path="/UserDashboard" component={UserDashboard} />
                <Route exact path="/AdminUpdateForm" component={AdminUpdateForm} />
+               <Route exact path="/demo" component={demo} />
                <Redirect to="/Login"/>
                </Switch>
            </Router>

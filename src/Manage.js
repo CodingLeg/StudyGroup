@@ -12,13 +12,10 @@ export default class Manage extends Component {
         this.state={
             data:[],
             group:[],
-            user:[]
-          
+            user:[]         
         };
     }
 
-    
- 
 
     fetchGroup(){
          fetch('http://localhost:8000/group/')
@@ -28,10 +25,9 @@ export default class Manage extends Component {
                  group:data
              });
              console.log(data)
-
-         });
-     
+         });     
      }
+     
 
     fetchData(){
        var id=this.props.match.params.id;
@@ -45,8 +41,7 @@ export default class Manage extends Component {
             console.log(data)
 
         });
-    
-    }
+     }
     
    
     componentDidMount(){
@@ -59,8 +54,8 @@ export default class Manage extends Component {
 
 
     deleteall(){
-for(var i=0;i<this.state.group.length;i++){
-    fetch('http://127.0.0.1:8000/group/'+this.state.group[i].id+"/",{
+        var id=this.props.match.params.id;
+    fetch('http://127.0.0.1:8000/group/'+id+"/",{
               method:'DELETE',
               headers:{
                   'Content-type': 'application/json; charset=UTF-8',
@@ -70,8 +65,8 @@ for(var i=0;i<this.state.group.length;i++){
           .then((data)=>console.log(data))
           .catch(error=>console.log(error))
 
-}
-window.location.replace('/Dashboard');
+
+window.location.replace('/UserDashboard');
     }
 
 
@@ -86,7 +81,6 @@ window.location.replace('/Dashboard');
           .then((data)=>console.log(data))
           .catch(error=>console.log(error))
           window.location.reload();
-           
           
       }
 users(){
@@ -103,17 +97,23 @@ users(){
 }
 
       add(){        
-        fetch('http://127.0.0.1:8000/group/',{
+        var id=this.props.match.params.id;
+        var gname=this.props.match.params.gname;
+        console.log("//////////////")
+        console.log(this.props.match.params)
+        console.log("//////////////")
+
+
+        fetch('http://127.0.0.1:8000/member/',{
             method:'POST',
-            body:JSON.stringify({"gpName":this.state.data.gpName,"subscribe":this.myRef.current.value,"role":"user"}),
+            body:JSON.stringify({"grp_ID":id,"user_ID":this.myRef.current.value,"role":"user",
+            "gpName":gname}),
             headers:{
                 'Content-type': 'application/json; charset=UTF-8',
             },
         })
         .then(response=>response.json())
         .then((data)=>console.log(data))
-       
-
         
       }
 
@@ -130,7 +130,7 @@ users(){
         const add=this.state.user.map((grp)=>{
             
             return(
-                <option>{grp.full_name}</option>
+                <option value={grp.id}>{grp.full_name}</option>
             )
 
         
@@ -138,8 +138,108 @@ users(){
 
         return (
             <>
+
+<div id="page-top">
   
-            <div className="card mx-auto mt-3" style={{width:'400px'}} >
+  <div id="wrapper">
+    
+   
+    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon">
+          <img src="https://realcoderz.com/img/cropped-logowhitetexttransparent.png"/>
+        </div>
+
+      </a>
+      
+      <hr class="sidebar-divider"></hr>
+      <div class="sidebar-heading">
+        Features
+      </div>
+      <li class="nav-item">
+        <a class="nav-link" href="/UserDashboard">
+          <i class="fas fa-fw fa-palette"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="/CreateGroup">
+          <i class="fas fa-fw fa-palette"></i>
+          <span>Create Group</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/Update/">
+          <i class="fas fa-fw fa-palette"></i>
+          <span>Update Profile</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/AllGroup/">
+          <i class="fas fa-fw fa-palette"></i>
+          <span>All Group</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <div class="nav-link" >
+         
+
+            
+        <input className ="btn btn-danger"  type="button"  value="Log Out" onClick={this.logout} />
+        
+         
+        </div>
+      </li>
+
+      
+
+
+     
+
+      <hr class="sidebar-divider"></hr>
+     
+     
+      <li class="nav-item">
+        
+         
+        
+      </li>
+      <hr class="sidebar-divider"></hr>
+      <div class="version" id="version-ruangadmin"></div>
+    </ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+
+        
+     
+              <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+             <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+               <i class="fa fa-bars"></i>
+             </button>
+
+             <ul class="navbar-nav ml-auto">
+   
+               <li class="nav-item dropdown no-arrow">
+                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                   <img class="img-profile rounded-circle" src={localStorage.getItem("avatar")} style={{ maxwidth: '60px'}}/>
+                   <span class="ml-2 d-none d-lg-inline text-white small"><h4 ><button className="btn btn-primary" > { localStorage.getItem('username')} </button><button className="btn btn-primary ml-2" > { localStorage.getItem('email')} </button></h4></span>
+                   
+                 </a>
+                 
+               </li>
+             </ul>
+           </nav>
+    
+
+
+
+  
+            <div className="card mx-auto mt-3" style={{width:'420px'}} >
             <div className="card-body">
               <div className="d-flex">
       <h5 className="card-title">{this.state.data.gpName}</h5>
@@ -150,19 +250,26 @@ users(){
       </div>
       
       <div className="row d-flex">
-      <select  className="form-control" ref={this.myRef} style={{width:"220px"}} >
+      <select  class="form-control" ref={this.myRef} style={{width:"220px"}} >
         {add}
       </select>
       <button type="button" value="id" onClick={this.add} className="btn btn-primary ml-3">Add Member</button>
       </div>
       <div className="row d-flex mt-3">
-      <select className="form-control" ref={this.myRef1}  style={{width:"220px"}}  placeholder="Full Name">
+      <select class="form-control" ref={this.myRef1}  style={{width:"220px"}}  placeholder="Full Name">
           {dlt}
       </select>
       <button type="button" value="id" onClick={this.delete} className="btn btn-danger ml-3">Remove Member</button>
       </div>
    </div>
     </div>
+    </div>
+    
+    </div>
+
+</div>  
+
+</div>
     </>
         )
     }
